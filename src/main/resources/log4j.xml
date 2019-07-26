@@ -11,8 +11,9 @@
 	</appender>
 	
 	<!-- Application Loggers -->
+	<!-- 	MyBatis가 출력하는 로그를 보기 위해서 debug 또는 trace 로 레벨을 낮추어 설정 -->
 	<logger name="kr.ac.hit">
-		<level value="info" />
+		<level value="trace" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
