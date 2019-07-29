@@ -12,5 +12,7 @@
 <c:forEach items="${memberList}" var="vo">
 	<a href="${pageContext.request.contextPath}/member/edit.do?memId=${vo.memId}">${vo.memId}</a> : ${vo.memName} <br />
 </c:forEach>
+<hr />
+<a href="${pageContext.request.contextPath}/member/add.do">회원가입</a>
 </body>
 </html>

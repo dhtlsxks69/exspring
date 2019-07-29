@@ -9,8 +9,8 @@
 	<!-- 	즉, 일반적으로 Service, Dao와 관련된 객체들을 등록 -->
 	
 	<!-- 	데이터베이스와 연결을 생성해주는 데이터소스 객체 등록  -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/com" />
 		<property name="username" value="com" />
 		<property name="password" value="com01" />

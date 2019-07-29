@@ -11,6 +11,8 @@
     <typeAliases>
 		<!-- MyBatis 설정파일에서 kr.ac.hit.myapp.member.MemberVo 대신 MemberVo 라고 사용 가능 -->
         <typeAlias type="kr.ac.hit.myapp.member.MemberVo" alias="MemberVo" />
+        <typeAlias type="kr.ac.hit.myapp.bbs.BbsVo" alias="BbsVo" />
+        <typeAlias type="kr.ac.hit.myapp.prod.ProdVo" alias="ProdVo" />
     </typeAliases>
 	<!-- 스프링과 함께 사용하는 경우, 데이터베이스와의 연결은 스프링이 담당하므로 불필요 -->
 <!--   <environments default="development"> -->
@@ -27,5 +29,7 @@
 	<!-- 	MyBatis를 통해서 실행할 SQL문들을 정의해 놓은 xml 파일들의 위치를 등록 -->
   <mappers>
     <mapper resource="batis/mappers/MemberMapper.xml"/>
+    <mapper resource="batis/mappers/BbsMapper.xml"/>
+    <mapper resource="batis/mappers/ProdMapper.xml"/>
   </mappers>
 </configuration>

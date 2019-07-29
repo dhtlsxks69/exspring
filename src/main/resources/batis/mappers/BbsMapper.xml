@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="kr.ac.hit.myapp.bbs.BbsDao">
+      <insert id="insert" parameterType="BbsVo">
+          INSERT
+          INTO bbs(bbs_title, bbs_content, bbs_writer)
+          VALUES (#{bbsTitle}, #{bbsContent}, #{bbsWriter})
+      </insert>
+      
+      <select id="selectList" resultType="BbsVo">
+          SELECT bbs_no, bbs_title, bbs_writer, bbs_reg_date, bbs_count
+          FROM bbs
+      </select>
+      
+      <select id="select" parameterType="int" resultType="BbsVo" >
+          SELECT bbs_no, bbs_title, bbs_content, bbs_writer, bbs_reg_date, bbs_count
+          FROM bbs
+          WHERE bbs_no = #{bbsNo}
+      </select>
+      
+      <update id="update" parameterType="BbsVo">
+          UPDATE bbs
+          SET bbs_title = #{bbsTitle}, bbs_content = #{bbsContent}
+          WHERE bbs_no = #{bbsNo}
+      </update>
+      
+      <delete id="delete" parameterType="int">
+          DELETE
+          FROM bbs
+          WHERE bbs_no = #{bbsNo}
+      </delete>
+      
+  </mapper>
