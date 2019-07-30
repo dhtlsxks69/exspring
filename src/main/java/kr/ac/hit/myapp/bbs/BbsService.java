@@ -7,5 +7,5 @@ public interface BbsService {
 	public List<BbsVo> selectList();
 	public BbsVo select(int bbsNo);
 	public int update(BbsVo vo);
-	public int delete(int bbsNo);
+	public int delete(BbsVo vo);
 }

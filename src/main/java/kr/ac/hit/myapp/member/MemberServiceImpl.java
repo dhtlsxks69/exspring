@@ -41,4 +41,9 @@ public class MemberServiceImpl implements MemberService{
 		int num = memberDao.delete(vo);
 		return num;
 	}
+
+	@Override
+	public MemberVo selectLoginUser(MemberVo vo) {
+		return memberDao.selectLoginUser(vo);
+	}
 }

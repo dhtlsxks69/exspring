@@ -23,13 +23,13 @@
       <update id="update" parameterType="BbsVo">
           UPDATE bbs
           SET bbs_title = #{bbsTitle}, bbs_content = #{bbsContent}
-          WHERE bbs_no = #{bbsNo}
+          WHERE bbs_no = #{bbsNo} AND bbs_writer = #{bbsWriter}
       </update>
       
-      <delete id="delete" parameterType="int">
+      <delete id="delete" parameterType="BbsVo">
           DELETE
           FROM bbs
-          WHERE bbs_no = #{bbsNo}
+          WHERE bbs_no = #{bbsNo} AND bbs_writer = #{bbsWriter}
       </delete>
       
   </mapper>

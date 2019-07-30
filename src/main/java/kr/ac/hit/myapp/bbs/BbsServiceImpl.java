@@ -32,7 +32,7 @@ public class BbsServiceImpl implements BbsService{
 	}
 
 	@Override
-	public int delete(int bbsNo) {
-		return bbsDao.delete(bbsNo);
+	public int delete(BbsVo vo) {
+		return bbsDao.delete(vo);
 	}
 }

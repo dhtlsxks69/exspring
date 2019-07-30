@@ -28,12 +28,12 @@
 	<!-- memberMap이라는 resultMap에 정의된 대로 컬럼값을 자바 객체의 변수(속성)에 담으라는 의미 -->
 	<!-- <select id="selectList" resultMap="memberMap"> -->
 	<select id="selectList" resultType="MemberVo">
- 	    SELECT mem_id, mem_pass, mem_name, mem_point
+ 	    SELECT mem_id, mem_name, mem_point
  	    FROM member
  	</select>
  	
 	<select id="select" parameterType="string" resultType="MemberVo">
- 	    SELECT mem_id, mem_pass, mem_name, mem_point
+ 	    SELECT mem_id, mem_name, mem_point
  	    FROM member
  	    WHERE mem_id = #{memId}
  	</select>
@@ -49,5 +49,11 @@
 	    FROM member
 	    WHERE mem_id = #{memId}
 	</delete>
+	
+	<select id="selectLoginUser" parameterType="MemberVo" resultType="MemberVo">
+	    SELECT mem_id, mem_name, mem_point
+	    FROM member
+	    WHERE mem_id = #{memId} AND mem_pass = #{memPass}
+	</select>
 	
 </mapper>

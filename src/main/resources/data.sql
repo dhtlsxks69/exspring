@@ -54,6 +54,8 @@ CREATE TABLE attach
 --  ,FOREIGN KEY (att_bbs_no) REFERENCES attach (att_no)
 );
 
+select * from attach;
+
 -- 댓글 테이블 생성  
 CREATE TABLE reply
 ( rep_no INT PRIMARY KEY AUTO_INCREMENT, 

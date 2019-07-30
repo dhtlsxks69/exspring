@@ -8,4 +8,5 @@ public interface MemberService {
 	public MemberVo select(String memId);
 	public int update(MemberVo vo);
 	public int delete(MemberVo vo);
+	public MemberVo selectLoginUser(MemberVo vo);
 }

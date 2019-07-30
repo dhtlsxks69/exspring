@@ -89,6 +89,13 @@
 		    <version>2.2</version>
 		</dependency>
 		
+		<!-- 파일업로드를 위한 CommonsMultipartResolver 사용을 위해서 -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

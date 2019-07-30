@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
+<title>상품관리</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/comm/menu.jsp" %>
 	<h1>상품 상세정보</h1>
 	<form action="${pageContext.request.contextPath}/prod/edit.do" method="post">
 	<input type="hidden" name="prodNo" value="${prodVo.prodNo}" />
