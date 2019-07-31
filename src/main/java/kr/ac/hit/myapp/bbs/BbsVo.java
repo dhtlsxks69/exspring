@@ -1,6 +1,9 @@
 package kr.ac.hit.myapp.bbs;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class BbsVo {
 	private int bbsNo; 
@@ -9,7 +12,25 @@ public class BbsVo {
 	private String bbsWriter;
 	private Date bbsRegDate; 
 	private int bbsCount;
+	//파일 데이터를 받기위한 변수 MultipartFile 타입으로 선언
+	//같은 파라미터 이름으로 전송되는 파일이 2개 이상인 경우, List<MultipartFile> 타입으로 선언
+	private List<MultipartFile> uploadList;
 	
+	//데이터베이스에서 첨부파일 테이블과 조인하여 조회한 결과를 담기 위해서
+	private List<AttachVo> attList; //2개 이상의 첨부파일 정보를 담기 위한
+	
+	public List<AttachVo> getAttList() {
+		return attList;
+	}
+	public void setAttList(List<AttachVo> attList) {
+		this.attList = attList;
+	}
+	public List<MultipartFile> getUploadList() {
+		return uploadList;
+	}
+	public void setUploadList(List<MultipartFile> uploadList) {
+		this.uploadList = uploadList;
+	}
 	public int getBbsNo() {
 		return bbsNo;
 	}

@@ -2,11 +2,25 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: 스프링의 DispatcherServlet들이 모두 공유하는 객체들을 등록 -->
 	<!-- 	즉, 일반적으로 Service, Dao와 관련된 객체들을 등록 -->
+	
+	<!-- @Transactional 같은 애노테이션을 사용하여 트랜잭션 설정이 가능하도록 -->
+	<!-- 트랜잭션매니저 객체 등록시 이름을 "transactionManager"로 설정하지 않았다면, -->
+	<!-- transaction-manager="트랜잭션매니저등록이름" 속성으로 지정 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- 스프링의 트랜잭션 관리기능을 사용하기 위해서 등록 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
 	
 	<!-- 	데이터베이스와 연결을 생성해주는 데이터소스 객체 등록  -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
@@ -34,5 +48,12 @@
 	<!-- @Mapper가 붙은 인터페이스들을 찾아서 -->
 	<!-- MyBatis를 사용하는 구현체를 자동으로 생성하여 스프링에 등록 -->
 	<mybatis-spring:scan base-package="kr.ac.hit.myapp"  annotation="org.apache.ibatis.annotations.Mapper" />
+	
+	<!-- base-package에 지정된 패키지(폴더) 아래에 있는 클래스들 중에서 -->
+	<!-- @Controller, @Service, @Repository, @Component가 붙은 클래스의 객체를 만들어 스프링에 등록 -->
+	<context:component-scan base-package="kr.ac.hit.myapp">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<!-- @Controller 붙은 클래스는 찾지 않도록 -->
+	</context:component-scan>
 	
 </beans>

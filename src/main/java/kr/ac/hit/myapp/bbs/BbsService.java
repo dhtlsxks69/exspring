@@ -1,5 +1,6 @@
 package kr.ac.hit.myapp.bbs;
 
+import java.io.File;
 import java.util.List;
 
 public interface BbsService {
@@ -8,4 +9,6 @@ public interface BbsService {
 	public BbsVo select(int bbsNo);
 	public int update(BbsVo vo);
 	public int delete(BbsVo vo);
+	public AttachVo selectAttach(int attNo);
+	public File getAttachFile(AttachVo vo);
 }

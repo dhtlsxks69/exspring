@@ -15,6 +15,9 @@ CREATE TABLE member
 -- , PRIMARY KEY ('mem_id')
 );
 
+--회원 프로필 사진을 위한 컬럼 추가
+ALTER TABLE member ADD mem_img VARCHAR(100);
+
 select * from member;
 
 -- BBS 테이블 생성  
@@ -53,6 +56,17 @@ CREATE TABLE attach
 --  ,PRIMARY KEY (att_no) 
 --  ,FOREIGN KEY (att_bbs_no) REFERENCES attach (att_no)
 );
+
+-- 해당 글과 그 글의 첨부파일 정보가 함께 조회되도록
+SELECT bbs_no, bbs_title, bbs_content, bbs_writer, bbs_reg_date, bbs_count, att_no, att_org_name, att_new_name, att_bbs_no
+FROM bbs
+LEFT OUTER JOIN attach
+ON bbs_no = att_bbs_no
+WHERE bbs_no = 21;
+
+SELECT bbs_no, bbs_title, bbs_content, bbs_writer, bbs_reg_date, bbs_count
+FROM bbs
+WHERE bbs_no = 21;
 
 select * from attach;
 
