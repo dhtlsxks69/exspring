@@ -1,11 +1,18 @@
 package kr.ac.hit.myapp;
 
 import java.util.Map;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import kr.ac.hit.myapp.bbs.BbsService;
+import kr.ac.hit.myapp.bbs.BbsVo;
+import kr.ac.hit.myapp.member.MemberVo;
 
 @Controller
 public class TestController {
@@ -53,4 +60,23 @@ public class TestController {
 		
 		return "result";
 	}
+	
+	@Resource
+	private BbsService bbsService;
+	
+	@RequestMapping("/test/auto.do")
+	public String auto(HttpSession session) {
+		BbsVo vo = new BbsVo();
+		MemberVo loginUser = (MemberVo) session.getAttribute("loginUser"); // 로그인한 사용자
+		vo.setBbsWriter(loginUser.getMemId()); // 로그인한 사용자 아이디로 글쓴이를 강제설정
+		
+		for (int i = 0; i < 50; i++) {
+			vo.setBbsTitle("제목" + System.nanoTime());
+			vo.setBbsContent("내용" + UUID.randomUUID());
+			bbsService.insert(vo);
+		}
+		
+		return "redirect:/";
+	}
+	
 }

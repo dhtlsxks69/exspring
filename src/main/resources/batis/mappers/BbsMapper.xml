@@ -32,6 +32,13 @@
       <select id="selectList" resultType="BbsVo">
           SELECT bbs_no, bbs_title, bbs_writer, bbs_reg_date, bbs_count
           FROM bbs
+          ORDER BY bbs_reg_date DESC
+          LIMIT #{firstRecordIndex}, #{size}
+      </select>
+      
+      <select id="selectCount" resultType="int">
+          SELECT count(*)
+          FROM bbs
       </select>
       
       <select id="select" parameterType="int" resultMap="bbsMap" >

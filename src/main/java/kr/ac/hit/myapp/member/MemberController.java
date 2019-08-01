@@ -1,12 +1,19 @@
 package kr.ac.hit.myapp.member;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -101,5 +108,15 @@ public class MemberController {
 //		session.removeAttribute("loginUser"); // 세션에서 "loginUser" 속성 자체를 제거 
 		session.invalidate(); // 세션 객체 자체를 삭제(하고 새로 생성)
 		return "redirect:/member/login.do";
+	}
+	
+	//회원아이디를 받아서 그 회원의 사진(이미지)파일을 응답으로 전송
+	@RequestMapping("/member/down.do")
+	public void down(String memId, HttpServletResponse resp) throws IOException {
+		MemberVo vo = memberService.select(memId);
+		File f = memberService.getImgFile(vo);
+		//파일 f의 내용을 응답 객체에 쓰기 (부라우저로 전송)
+//		Files.copy(Paths.get(f.getAbsolutePath()), resp.getOutputStream());
+		FileCopyUtils.copy(new FileInputStream(f), resp.getOutputStream());
 	}
 }

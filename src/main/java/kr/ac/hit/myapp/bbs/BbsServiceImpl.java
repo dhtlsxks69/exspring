@@ -1,7 +1,6 @@
 package kr.ac.hit.myapp.bbs;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,8 +11,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import kr.ac.hit.myapp.comm.PageInfo;
 
 //클래스에 @Transactional를 붙이면, 클래스 내의 모든 메서드에 @Transactional를 붙인 것과 동일
 //@Transactional 
@@ -39,6 +39,8 @@ public class BbsServiceImpl implements BbsService{
 	public int insert(BbsVo vo) {
 		//게시글 정보 저장
 		int num = bbsDao.insert(vo);
+		
+		if(vo.getUploadList() == null) return num; //첨부파일 파라미터 자체를 받지 않은 경우
 		
 		List<MultipartFile> uploadList = vo.getUploadList();
 		for (MultipartFile f : uploadList) {
@@ -68,8 +70,8 @@ public class BbsServiceImpl implements BbsService{
 	}
 
 	@Override
-	public List<BbsVo> selectList() {
-		return bbsDao.selectList();
+	public List<BbsVo> selectList(PageInfo info) {
+		return bbsDao.selectList(info);
 	}
 
 	@Override
@@ -95,5 +97,10 @@ public class BbsServiceImpl implements BbsService{
 	@Override
 	public File getAttachFile(AttachVo vo) {
 		return new File(uploadDir, vo.getAttNewName());
+	}
+
+	@Override
+	public int selectCount() {
+		return bbsDao.selectCount();
 	}
 }

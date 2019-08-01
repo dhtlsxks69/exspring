@@ -9,7 +9,8 @@
 <body>
 <%@ include file="/WEB-INF/views/comm/menu.jsp" %>
 <h1>회원가입</h1>
-<form action="${pageContext.request.contextPath}/member/add.do" method="POST">
+<form action="${pageContext.request.contextPath}/member/add.do" method="POST" enctype="multipart/form-data">
+프로필 : <input type="file" name="multipartFile" /> <br />
 아이디 : <input type="text" name="memId" /> <br /> 
 비밀번호 : <input type="password" name="memPass" /> <br /> 
 이름 : <input type="text" name="memName" /> <br /> 

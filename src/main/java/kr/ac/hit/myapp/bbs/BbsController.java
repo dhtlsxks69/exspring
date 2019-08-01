@@ -17,6 +17,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.ac.hit.myapp.comm.PageInfo;
 import kr.ac.hit.myapp.member.MemberVo;
 
 @Controller
@@ -38,8 +39,14 @@ public class BbsController {
 	}
 	
 	@RequestMapping(value="/bbs/list.do", method=RequestMethod.GET)
-	public String list(Map model) {
-		List<BbsVo> list = bbsService.selectList();
+	public String list(Map model, PageInfo info) {
+		int cnt = bbsService.selectCount(); //전체 게시물 수 조회
+		
+		info.setTotalRecordCount(cnt);
+		info.makePageHtml();
+		model.put("pageInfo", info);
+		
+		List<BbsVo> list = bbsService.selectList(info);
 		model.put("bbsList", list);
 		return "bbs/bbsList";
 	}

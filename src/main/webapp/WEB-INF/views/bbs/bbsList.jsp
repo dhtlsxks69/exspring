@@ -38,6 +38,14 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	${pageInfo.pageHtml}
+<!-- 	<script> 
+		페이지 링크 클릭시 실행될 goPage()함수를 재정의 할 필요가 있을 경우, 다시 선언	
+ 		function goPage(no){
+ 			location.href = location.pathname + '?page=' + no;
+ 		}
+ 	</script> -->
 	<hr />
 	<a href="${pageContext.request.contextPath}/bbs/add.do"><button>글쓰기</button></a>
 </body>

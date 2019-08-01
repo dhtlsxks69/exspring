@@ -1,5 +1,6 @@
 package kr.ac.hit.myapp.member;
 
+import java.io.File;
 import java.util.List;
 
 public interface MemberService {
@@ -9,4 +10,5 @@ public interface MemberService {
 	public int update(MemberVo vo);
 	public int delete(MemberVo vo);
 	public MemberVo selectLoginUser(MemberVo vo);
+	public File getImgFile(MemberVo vo);
 }
