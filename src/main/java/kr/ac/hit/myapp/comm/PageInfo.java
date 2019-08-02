@@ -24,29 +24,40 @@ public class PageInfo {
 		firstRecordIndex = (page - 1) * size;
 		lastRecordIndex = page * size;
 		
-		//페이지 링크들 중에 현재 보고 있는 페이지는 링크가 걸려있지 않도록
-		
-		//현재 페이지 리스트에 첫 페이지가 있는 경우, '처음'은 링크가 걸리지 않도록
-		
-		//현재 페이지 리스트에 마지막 페이지가 있는 경우, '마지막'은 링크가 걸리지 않도록
-		
-		//이전 페이지 리스트가 없는 경우, '이전'은 링크가 걸리지 않도록
-		
-		//다음 페이지 리스트가 없는 경우, '다음'은 링크가 걸리지 않도록
-		
 		String html = "";
 		
-		html += "<a href='#' onclick='goPage(1);'>≪처음</a> ";
-		
-		html += "<a href='#' onclick='goPage(" + (firstPageNoOnPageList-1) + ");'>＜이전</a> ";
-		
-		for (int i = firstPageNoOnPageList; i <= lastPageNoOnPageList; i++) {
-			html += "<a href='#' onclick='goPage(" + i + ");'>" + i + "</a> ";
+		//현재 페이지 리스트에 첫 페이지가 있는 경우, '처음'은 링크가 걸리지 않도록
+		if(firstPageNoOnPageList != 1) { //페이지리스트의 첫 페이지가 1페이지가 아닌 경우
+			html += "<a href='#' onclick='goPage(1);'>≪처음</a> ";
 		}
 		
-		html += " <a href='#' onclick='goPage(" + (lastPageNoOnPageList+1) + ");'>다음＞</a>";
+		//이전 페이지 리스트가 없는 경우, '이전'은 링크가 걸리지 않도록
+		if(firstPageNoOnPageList != 1) {
+			html += "<a href='#' onclick='goPage(" + (firstPageNoOnPageList-1) + ");'>＜이전</a> | ";
+		}else {
+			html += "＜이전 | ";
+		}
 		
-		html += " <a href='#' onclick='goPage(" + totalPageCount + ");'>마지막≫</a>";
+		for (int i = firstPageNoOnPageList; i <= lastPageNoOnPageList; i++) {
+			//페이지 링크들 중에 현재 보고 있는 페이지는 링크가 걸려있지 않도록
+			if(page == i) {
+				html +=  i + " | ";
+			}else {				
+				html += "<a href='#' onclick='goPage(" + i + ");'>" + i + "</a> | ";
+			}
+		}
+		
+		//다음 페이지 리스트가 없는 경우, '다음'은 링크가 걸리지 않도록
+		if(lastPageNoOnPageList < totalPageCount) { //페이지리스트의 마지막 페이지번호가 총 페이지수보다 작을 때
+			html += " <a href='#' onclick='goPage(" + (lastPageNoOnPageList+1) + ");'>다음＞</a>";			
+		}else {
+			html += "다음＞";
+		}
+		
+		//현재 페이지 리스트에 마지막 페이지가 있는 경우, '마지막'은 링크가 걸리지 않도록
+		if(lastPageNoOnPageList < totalPageCount) {
+			html += " <a href='#' onclick='goPage(" + totalPageCount + ");'>마지막≫</a>";			
+		}
 		
 		html += "<script> function goPage(no){location.href = location.pathname + '?page=' + no;}</script>";
 		

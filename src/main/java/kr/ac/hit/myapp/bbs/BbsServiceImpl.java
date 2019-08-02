@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.hit.myapp.comm.PageInfo;
+import kr.ac.hit.myapp.comm.SearchInfo;
 
 //클래스에 @Transactional를 붙이면, 클래스 내의 모든 메서드에 @Transactional를 붙인 것과 동일
 //@Transactional 
@@ -70,7 +71,7 @@ public class BbsServiceImpl implements BbsService{
 	}
 
 	@Override
-	public List<BbsVo> selectList(PageInfo info) {
+	public List<BbsVo> selectList(SearchInfo info) {
 		return bbsDao.selectList(info);
 	}
 
@@ -100,7 +101,7 @@ public class BbsServiceImpl implements BbsService{
 	}
 
 	@Override
-	public int selectCount() {
-		return bbsDao.selectCount();
+	public int selectCount(SearchInfo info) {
+		return bbsDao.selectCount(info);
 	}
 }

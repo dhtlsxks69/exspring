@@ -8,7 +8,7 @@
 <title>회원관리</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/comm/menu.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/comm/menu.jsp" %> --%>
 <h1>회원정보수정</h1>
 <form action="${pageContext.request.contextPath}/member/edit.do" method="POST">
 <h3>프로필</h3>

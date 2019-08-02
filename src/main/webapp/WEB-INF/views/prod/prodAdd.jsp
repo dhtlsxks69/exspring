@@ -7,7 +7,7 @@
 <title>상품관리</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/comm/menu.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/comm/menu.jsp" %> --%>
 <h1>상품 추가</h1>
 <form action="${pageContext.request.contextPath}/prod/add.do" method="post">
 이름 : <input type="text" name="prodName" /> <br />

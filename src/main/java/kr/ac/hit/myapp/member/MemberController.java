@@ -11,9 +11,11 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,12 +26,21 @@ public class MemberController {
 	private MemberService memberService;
 	//요청방식 : GET방식으로
 	@RequestMapping(value="/member/add.do", method=RequestMethod.GET)
-	public String addForm() {
+	public String addForm(MemberVo vo) {
+		//스프링 폼 태그(form:form)의 modelAttribute 사용을 위해서 
+		//빈 MemberVo 객체를 모델에 저장하기 위해서 인자로 설정
 		return "member/memAdd";
 	}
 	//요청방식 : POST방식으로	
 	@RequestMapping(value="/member/add.do", method=RequestMethod.POST)
-	public String add(MemberVo vo) {
+	public String add(@Valid MemberVo vo, BindingResult result) {
+		//@Valid 를 붙이면 해당 객체 내부에 적어놓은 조건에 따라서
+		// 객체의 변수(속성) 값들을 검사하고,
+		// 그 결과를 다음 인자인 BindingResult 에 저장하여 전달
+		if(result.hasErrors()) { //검증 결과 에러가 있는지 확인
+			return "member/memAdd"; //회원가입 화면을 다시 출력
+		}
+		
 		//파라미터로 넘어온 값들을 받아서 데이터베이스에 추가(insert)
 		memberService.insert(vo);
 		//JSP 파일로 이동하는 대신 redirect: 뒤에 지정한 주소로 이동하라는 응답을 전송

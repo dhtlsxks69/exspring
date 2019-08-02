@@ -14,10 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.ac.hit.myapp.comm.PageInfo;
+import kr.ac.hit.myapp.comm.SearchInfo;
 import kr.ac.hit.myapp.member.MemberVo;
 
 @Controller
@@ -38,13 +39,18 @@ public class BbsController {
 		return "redirect:/bbs/list.do";
 	}
 	
+	//컨트롤러 메서드의 인자로 사용자가 정의한 클래스의 객체를 받는 경우
+	//그 객체를 뷰(JSP)에서 사용하기 위해 모델에 저장하는 방법
+	// 1. 모델(Map, Model, ModelMap타입)에 이름을 부여하여 저장
+	// 2. 인자 앞에 @ModelAttribute("이름")을 붙이면 모델에 자동 저장
+	// 3. @ModelAttribute() 를 생략해도 모델에 자동 저장 (이름은 클래스이름 첫글자만 소문자로)
 	@RequestMapping(value="/bbs/list.do", method=RequestMethod.GET)
-	public String list(Map model, PageInfo info) {
-		int cnt = bbsService.selectCount(); //전체 게시물 수 조회
+	public String list(Map model, SearchInfo info) { //@ModelAttribute("searchInfo") <-- 2번방식
+		int cnt = bbsService.selectCount(info); //전체 게시물 수 조회
 		
 		info.setTotalRecordCount(cnt);
 		info.makePageHtml();
-		model.put("pageInfo", info);
+//		model.put("searchInfo", info); // 1번 방식
 		
 		List<BbsVo> list = bbsService.selectList(info);
 		model.put("bbsList", list);

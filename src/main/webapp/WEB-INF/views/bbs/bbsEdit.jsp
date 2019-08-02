@@ -8,7 +8,7 @@
 <title>게시판</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/comm/menu.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/comm/menu.jsp" %> --%>
 	<h1>글 상세정보</h1>
 	<form action="${pageContext.request.contextPath}/bbs/edit.do" method="post">
 	<input type="hidden" name="bbsNo" value="${bbsVo.bbsNo}" />

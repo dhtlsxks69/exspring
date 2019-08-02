@@ -11,7 +11,7 @@
 <!-- 다른 JSP 파일의 내용을 삽입 3가지방법 -->
 
 <!-- 1. %@ include 는 외부 JSP 파일의 내용을 현재 위치에 복사해서 넣은 후 하나의 JSP 파일로 실행 -->
-<%@ include file="/WEB-INF/views/comm/menu.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/comm/menu.jsp" %> --%>
 
 <!-- 2. jsp:include 는 별도의 독립된 JSP파일로 요청을 보내서 출력 결과를 현재 위치에 포함 -->
 <%-- <jsp:include page="/WEB-INF/views/comm/menu.jsp"></jsp:include> --%>

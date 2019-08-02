@@ -8,7 +8,7 @@
 <title>상품관리</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/comm/menu.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/comm/menu.jsp" %> --%>
 <h1>상품목록</h1>
 	<table border="1">
 		<thead>

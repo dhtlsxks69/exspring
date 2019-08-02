@@ -7,7 +7,7 @@
 <title>게시판</title>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/comm/menu.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/comm/menu.jsp" %> --%>
 	<h1>글쓰기</h1>
 <!-- 	form이 전송할 데이터에 파일이 포함된 경우(<input type="file" />)이 포함된 경우 -->
 <!-- 	form의 enctype 속성값을 "multipart/form-data" 로 설정해야한다 -->
