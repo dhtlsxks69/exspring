@@ -25,11 +25,31 @@
 	</insert>
 	<!-- #{xxx}로 파라미터로 맏은 객체의 xxx 속성(변수)값을 SQL 내에 사용 가능 -->
  	
+	  <!-- 다수의 SQL문에서 공통적으로 사용할 부분을 별도의 sql 엘리먼트로 선언하고 -->
+	  <!-- 필요한 곳에서 include 를 사용하여 포함시켜서 사용 -->
+      <sql id="searchSql">
+          <!-- trim 내부에 내용이 있는 경우에만 앞에 WHERE를 붙인다 -->
+          <!-- 내용의 시작이 AND 또는 OR 인 경우, AND 또는 OR를 제거 -->
+          <trim prefix="WHERE" prefixOverrides="AND|OR">
+		  <!-- #{searchType} 값이 'title' 이면 들어갈 내용이 SQL문에 포함된다 -->
+          <if test="searchType == 'Id' or searchType == 'total'">
+              mem_id like concat('%', #{searchWord}, '%')
+          </if>
+          <!-- #{searchType} 값이 'content' 이면 들어갈 내용이 SQL문에 포함된다 -->
+          <if test="searchType == 'name' or searchType == 'total'">              
+              OR mem_name like concat('%', #{searchWord}, '%')
+       	  </if>
+          </trim>
+      </sql>
+ 	
 	<!-- memberMap이라는 resultMap에 정의된 대로 컬럼값을 자바 객체의 변수(속성)에 담으라는 의미 -->
 	<!-- <select id="selectList" resultMap="memberMap"> -->
 	<select id="selectList" resultType="MemberVo">
  	    SELECT mem_id, mem_name, mem_point
  	    FROM member
+ 	    <include refid="searchSql" />
+ 	    ORDER BY mem_id
+        LIMIT #{firstRecordIndex}, #{size}
  	</select>
  	
 	<select id="select" parameterType="string" resultType="MemberVo">
@@ -38,6 +58,13 @@
  	    WHERE mem_id = #{memId}
  	</select>
  	
+	<select id="selectCount" resultType="int">
+	    SELECT count(*)
+        FROM member
+		<!-- id가 "searchSql" sql 엘리먼트의 내용을 이곳에 추가 -->
+        <include refid="searchSql" />
+    </select>
+	
 	<update id="update" parameterType="MemberVo">
  	    UPDATE member
  	    SET mem_name = #{memName}, mem_point =#{memPoint}

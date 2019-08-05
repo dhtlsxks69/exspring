@@ -19,6 +19,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.ac.hit.myapp.comm.SearchInfo;
+
 @Controller
 public class MemberController {
 	//	@Autowired @Inject @Resource 중 하나를 사용하여 자동 주입(스프링은 new를 알아서 해주기 때문에 어노태이션을 넣으면 됨)
@@ -48,9 +50,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/list.do")
-	public String list(Map modelMap) {
+	public String list(Map modelMap, SearchInfo info) {
+		int cnt = memberService.selectCount(info);
+		
+		info.setTotalRecordCount(cnt);
+		info.makePageHtml();
+		
 		//데이터베이스에서 회원목록을 조회하고,
-		List<MemberVo> list = memberService.selectList();
+		List<MemberVo> list = memberService.selectList(info);
 		//조회한 회원목록인 list를 JSP에서 ${memberList}로 사용할 수 있도록 모델에 저장
 		modelMap.put("memberList", list);
 		return "member/memList";

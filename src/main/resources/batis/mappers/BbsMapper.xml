@@ -34,7 +34,7 @@
       <sql id="searchSql">
           <!-- trim 내부에 내용이 있는 경우에만 앞에 WHERE를 붙인다 -->
           <!-- 내용의 시작이 AND 또는 OR 인 경우, AND 또는 OR를 제거 -->
-          <trim prefix="WHERE" prefixOverrides="AND | OR">
+          <trim prefix="WHERE" prefixOverrides="AND|OR">
 		  <!-- #{searchType} 값이 'title' 이면 들어갈 내용이 SQL문에 포함된다 -->
           <if test="searchType == 'title' or searchType == 'total'">
               bbs_title like concat('%', #{searchWord}, '%')

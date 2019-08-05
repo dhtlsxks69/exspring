@@ -12,6 +12,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.ac.hit.myapp.comm.SearchInfo;
+
 //@Component @Controller @Service @Repositoty 중 하나를 붙여서 스프링에 등록
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -50,8 +52,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<MemberVo> selectList() {
-		List<MemberVo> list = memberDao.selectList();
+	public List<MemberVo> selectList(SearchInfo info) {
+		List<MemberVo> list = memberDao.selectList(info);
 		return list;
 	}
 
@@ -81,5 +83,10 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public File getImgFile(MemberVo vo) {
 		return new File(uploadImgDir, vo.getMemImg());
+	}
+
+	@Override
+	public int selectCount(SearchInfo info) {
+		return memberDao.selectCount(info);
 	}
 }
