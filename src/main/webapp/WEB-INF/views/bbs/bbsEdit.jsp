@@ -29,5 +29,36 @@
 	</c:if>
 		<a href="${pageContext.request.contextPath}/bbs/list.do"><input type="button" value="게시글목록" /></a>
 	</form>
+	
+	<hr />
+	<form action="" id="repForm">
+		<textarea rows="5" cols="100" name="repContent"></textarea>
+		<input type="button" value="저장" id="repAddBtn" />
+		<input type="hidden" name="repBbsNo" value="${bbsVo.bbsNo}" />
+	</form>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.js"></script>
+	<script>
+	$('#repAddBtn').on('click', function () {
+		$.ajax({
+	        url: '${pageContext.request.contextPath}/reply/add.do', //요청주소
+	        method: 'POST', //요청방식(GET,POST,PUT,DELETE,...)
+	        data : 'repBbsNo=' + $('[name="repBbsNo"]').val() + '&repContent=' + $('[name="repContent"]').val(), //요청시 함께 보낼 데이터(파라미터)
+	        dataType: 'json' //요청의 응답으로 받을 데이터의 타입(text,html,json,xml,...)
+	    })
+	    .done(function (data, status, jqXHR) {
+	        //요청을 보내고 성공적으로 응답을 받았을 때 실행될 함수
+	        //data: 응답으로 받은 데이터, status: 응답의 상태, jqXHR: 요청객체
+	        console.log('요청성공 : ');
+	        // dataType을 'json'으로 지정하면, jQuery가 응답을 JSON으로 파싱하여 data인자에 전달
+	        // data = JSON.parse(data); //JSON 문자열을 자바스크립트 객체로 변환
+	        console.log(data)
+	    })
+	    .fail(function (jqXHR, status, error) {
+	        //응답을 받는데 실패했을 때 실행될 함수
+	        //jqXHR: 요청객체, status: 응답상태, error: 발생한 오류
+	        console.log('요청실패 : ');
+	    });
+	});
+	</script>
 </body>
 </html>

@@ -33,11 +33,11 @@
           <trim prefix="WHERE" prefixOverrides="AND|OR">
 		  <!-- #{searchType} 값이 'title' 이면 들어갈 내용이 SQL문에 포함된다 -->
           <if test="searchType == 'Id' or searchType == 'total'">
-              mem_id like concat('%', #{searchWord}, '%')
+              UPPER (mem_id) like UPPER(concat('%', #{searchWord}, '%'))
           </if>
           <!-- #{searchType} 값이 'content' 이면 들어갈 내용이 SQL문에 포함된다 -->
           <if test="searchType == 'name' or searchType == 'total'">              
-              OR mem_name like concat('%', #{searchWord}, '%')
+              OR UPPER (mem_name) like UPPER(concat('%', #{searchWord}, '%'))
        	  </if>
           </trim>
       </sql>

@@ -14,6 +14,7 @@
         <typeAlias type="kr.ac.hit.myapp.bbs.BbsVo" alias="BbsVo" />
         <typeAlias type="kr.ac.hit.myapp.prod.ProdVo" alias="ProdVo" />
         <typeAlias type="kr.ac.hit.myapp.bbs.AttachVo" alias="AttachVo" />
+        <typeAlias type="kr.ac.hit.myapp.reply.ReplyVo" alias="ReplyVo" />
     </typeAliases>
 	<!-- 스프링과 함께 사용하는 경우, 데이터베이스와의 연결은 스프링이 담당하므로 불필요 -->
 <!--   <environments default="development"> -->
@@ -33,5 +34,6 @@
     <mapper resource="batis/mappers/BbsMapper.xml"/>
     <mapper resource="batis/mappers/ProdMapper.xml"/>
     <mapper resource="batis/mappers/AttachMapper.xml"/>
+    <mapper resource="batis/mappers/ReplyMapper.xml"/>
   </mappers>
 </configuration>

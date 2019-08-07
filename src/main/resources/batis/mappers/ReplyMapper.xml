@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="kr.ac.hit.myapp.reply.ReplyDao">
+      <insert id="insert" parameterType="ReplyVo">
+          INSERT 
+          INTO reply(rep_content, rep_writer, rep_bbs_no)
+          VALUES (#{repContent}, #{repWriter}, #{repBbsNo})
+      </insert>
+      
+      <select id="selectList" resultType="ProdVo">
+          SELECT prod_no, prod_name, prod_price
+          FROM product
+      </select>
+      
+      <delete id="delete" parameterType="int">
+          DELETE
+          FROM product
+          WHERE prod_no = #{prodNo}
+      </delete>
+      
+  </mapper>

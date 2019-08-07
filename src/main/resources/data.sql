@@ -82,6 +82,7 @@ CREATE TABLE reply
 --  ,FOREIGN KEY (rep_writer) REFERENCES member (mem_id)
 );
 
+select * from reply;
 
 --상품 테이블 : 상품번호, 상품명, 삼품가격, 상품설명, 제조사, (제조일자, 유통기한, 상품이미지)
 CREATE TABLE product

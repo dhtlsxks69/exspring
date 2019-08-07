@@ -4,8 +4,11 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 //스프링 웹 앱에서 특정 주소로 요청을 보내면 실행될 코드를 담고 있는 클래스
 @Controller
 public class HomeController {
-	
+	@Resource
+	MessageSource messageSource;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	// "/" 주소로 GET 방식의 요청이 오면 이 메서드를 실행
@@ -22,7 +26,10 @@ public class HomeController {
 	
 	// locale : 현재 애플리케이션의 지역(언어, 국가) 정보를 받을 수 있다.
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+//		System.out.println(messageSource.getClass().getName());
+//		String message = messageSource.getMessage("NotNull", null, Locale.ENGLISH);
+//		System.out.println(message);
+//		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		// 현재 시간을 담고 있는 Data 객체를 생성
 		Date date = new Date();
