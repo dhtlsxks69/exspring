@@ -13,6 +13,7 @@ db.password=데이터베이스접속비밀번호
 ## 스프링 학습 관련
 -스프링 동영상 강의
 	- https://www.youtube.com/playlist?list=PL9mhQYIlKEhfYqQ-UkO2pe2suSx9IoFT2
+	
 -스프링 관련 사이트
 	- https://tacademy.skplanet.com/live/player/listOnline.action
 
